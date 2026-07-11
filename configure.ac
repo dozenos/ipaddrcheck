@@ -1,0 +1,18 @@
+AC_INIT([ipaddrcheck], [1.1], [maintainers@dozenos.local], [ipaddrcheck], [https://github.com/dozenos/ipaddrcheck])
+AC_COPYRIGHT([Copyright (c) 2024 VyOS maintainers and contributors.])
+
+#AC_PROG_CC
+AM_PROG_CC_C_O
+
+AC_CHECK_HEADER([libcidr.h], [], [AC_MSG_FAILURE([libcidr.h is not found.])])
+
+AM_INIT_AUTOMAKE([gnu no-dist-gzip dist-bzip2 subdir-objects])
+AC_PREFIX_DEFAULT([/usr])
+
+AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile man/Makefile])
+AC_CONFIG_HEADERS([src/config.h])
+
+PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
+PKG_CHECK_MODULES([PCRE2], [libpcre2-8])
+
+AC_OUTPUT
